@@ -1,5 +1,5 @@
 import "../styles/globals.css"
-import "../styles/chat.css"
+import "../styles/chat.sass"
 import { configureStore } from "@reduxjs/toolkit"
 import { Provider } from "react-redux"
 import postsReducer from "../src/features/Posts"

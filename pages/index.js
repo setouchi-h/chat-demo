@@ -1,7 +1,8 @@
 import Head from "next/head"
 import styles from "/styles/Home.module.css"
-import { useSelector } from "react-redux"
-import { MessageInput } from "@/components/message-input"
+import { ChatLog } from "@/components/chat-log"
+import { Header } from "@/components/header/header"
+import { Footer } from "@/components/footer/footer"
 
 /**
  * UNIX TIME => hh:mm
@@ -12,8 +13,6 @@ const getStrTime = (time) => {
 }
 
 export default function Home() {
-  const postList = useSelector((state) => state.posts.value)
-
   return (
     <>
       <Head>
@@ -22,22 +21,11 @@ export default function Home() {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <main>
-        <div>
-          <h2>qaqaチャット</h2>
-        </div>
-        <div>
-          {postList.map((post) => (
-            <div key={post.id} className="post">
-              <h1 className="postName">{post.name}</h1>
-              <h1 className="postContent">{post.content}</h1>
-            </div>
-          ))}
-        </div>
-        <div>
-          <MessageInput />
-        </div>
+      <Header />
+      <main className={styles.main}>
+        <ChatLog />
       </main>
+      <Footer />
     </>
   )
 }
