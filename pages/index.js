@@ -1,8 +1,19 @@
 import Head from "next/head"
 import styles from "/styles/Home.module.css"
-import { MessageInput } from "../src/components/messageInput"
+import { useSelector } from "react-redux"
+import { MessageInput } from "@/components/message-input"
+
+/**
+ * UNIX TIME => hh:mm
+ **/
+const getStrTime = (time) => {
+  let t = new Date(time)
+  return `${t.getHours()}`.padStart(2, "0") + ":" + `${t.getMinutes()}`.padStart(2, "0")
+}
 
 export default function Home() {
+  const postList = useSelector((state) => state.posts.value)
+
   return (
     <>
       <Head>
@@ -11,32 +22,22 @@ export default function Home() {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <main className={styles.main}>
-        <MessageInput />
+      <main>
+        <div>
+          <h2>qaqaチャット</h2>
+        </div>
+        <div>
+          {postList.map((post) => (
+            <div key={post.id} className="post">
+              <h1 className="postName">{post.name}</h1>
+              <h1 className="postContent">{post.content}</h1>
+            </div>
+          ))}
+        </div>
+        <div>
+          <MessageInput />
+        </div>
       </main>
     </>
   )
-}
-
-/**
- * ユーザー名 (localStrageに保存)
- **/
-const getUName = () => {
-  const userName = localStorage.getItem('firebase-Chat1-username');
-  if (!userName) {
-    const inputName = window.prompt('ユーザー名を入力してください', '');
-    if (inputName){
-      localStorage.setItem('firebase-Chat1-username', inputName);
-      return inputName;
-    }    
-  }
-  return userName;
-}
-
-/**
- * UNIX TIME => hh:mm
- **/
-const getStrTime = (time) => {
-  let t = new Date(time);
-  return `${t.getHours()}`.padStart(2, '0') + ':' + `${t.getMinutes()}`.padStart(2, '0');
 }
