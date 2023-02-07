@@ -1,5 +1,3 @@
-import { useState } from "react"
-
 export const MessageInput = () => (
   <div>
     <form className="chatform">
