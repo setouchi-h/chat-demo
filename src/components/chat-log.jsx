@@ -1,9 +1,10 @@
 import Image from "next/image"
-import { useSelector } from "react-redux"
+import { useContext } from "react"
 import { RxFace } from "react-icons/rx"
+import { PostList } from "pages"
 
 export const ChatLog = () => {
-  const postList = useSelector((state) => state.posts.value)
+  const postList = useContext(PostList)
 
   return (
     <div>
